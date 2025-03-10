@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
@@ -7,7 +8,16 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   templateUrl: './navbar.component.html',
 })
 export class NavbarComponent {
+  document = inject(DOCUMENT);
+  window = document.defaultView;
+  isOpen = signal<boolean>(false);
   constructor() {}
 
-  ngOnInit(): void {}
+  navBarToggle(): void {
+    if (this.window)
+      if (this.window.innerWidth <= 1279) {
+        this.isOpen.set(!this.isOpen());
+        this.document.body.classList.toggle('mobile-nav-active');
+      }
+  }
 }

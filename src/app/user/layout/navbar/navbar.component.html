@@ -8,19 +8,35 @@
       <!-- <img src="assets/img/logo.png" alt=""> -->
       <h1>Sea Ways Delivery</h1>
     </a>
-    <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-    <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+    <i
+      (click)="navBarToggle()"
+      [class]="!isOpen() ? 'mobile-nav-show' : 'd-none'"
+      class="mobile-nav-toggle bi bi-list"
+    ></i>
+    <i
+      (click)="navBarToggle()"
+      [class]="isOpen() ? 'mobile-nav-hide' : 'd-none'"
+      class="mobile-nav-toggle bi bi-x"
+    ></i>
     <nav id="navbar" class="navbar">
       <ul>
-        <li><a routerLink="/" routerLinkActive="active">Home</a></li>
-        <li><a routerLink="/about" routerLinkActive="active">About</a></li>
-        <li>
+        <li (click)="navBarToggle()">
+          <a routerLink="/" routerLinkActive="active">Home</a>
+        </li>
+        <li (click)="navBarToggle()">
+          <a routerLink="/about" routerLinkActive="active">About</a>
+        </li>
+        <li (click)="navBarToggle()">
           <a routerLink="/services" routerLinkActive="active">Services</a>
         </li>
-        <li><a routerLink="/pricing" routerLinkActive="active">Pricing</a></li>
+        <li (click)="navBarToggle()">
+          <a routerLink="/pricing" routerLinkActive="active">Pricing</a>
+        </li>
 
-        <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
-        <li>
+        <li (click)="navBarToggle()">
+          <a routerLink="/contact" routerLinkActive="active">Contact</a>
+        </li>
+        <li (click)="navBarToggle()">
           <a
             class="track_Item"
             routerLink="/track-item"
