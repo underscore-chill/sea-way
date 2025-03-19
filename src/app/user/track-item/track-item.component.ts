@@ -63,7 +63,7 @@ export class TrackItemComponent {
     this.product.set(null);
 
     this.productService
-      .trackProduct('', this.form.value.trackingId!)
+      .trackProduct('', this.form.value.trackingId?.trim()!)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (response) => {

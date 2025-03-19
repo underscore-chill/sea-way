@@ -37,24 +37,26 @@ export class TrackProductComponent {
     this.errorMessage.set('');
     this.product.set(null);
 
-    this.productService.getProduct('', this.form.value.trackingId!).subscribe({
-      next: (response) => {
-        if (response.status == HttpStatusCode.Ok && response.success) {
-          this.product.set(response.data);
-        } else {
-          this.errorMessage.set('No product found with this tracking code');
-        }
-        this.isSearching.set(false);
-      },
-      error: (error) => {
-        this.errorMessage.set(
-          error.error.message ||
-            'Error searching for product. Please try again.'
-        );
-        this.isSearching.set(false);
-        console.error('Error searching product:', error);
-      },
-    });
+    this.productService
+      .getProduct('', this.form.value.trackingId?.trim()!)
+      .subscribe({
+        next: (response) => {
+          if (response.status == HttpStatusCode.Ok && response.success) {
+            this.product.set(response.data);
+          } else {
+            this.errorMessage.set('No product found with this tracking code');
+          }
+          this.isSearching.set(false);
+        },
+        error: (error) => {
+          this.errorMessage.set(
+            error.error.message ||
+              'Error searching for product. Please try again.'
+          );
+          this.isSearching.set(false);
+          console.error('Error searching product:', error);
+        },
+      });
   }
 
   clearSearch(): void {
